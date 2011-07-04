@@ -7,7 +7,7 @@ gem 'rails','3.0.0'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'gravatar_image_tag'
-
+gem 'bartt-ssl_requirement', :require => 'ssl_requirement'
 
 
 group :development do
