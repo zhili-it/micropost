@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  ssl_required :create, :new
-  ssl_allowed :destroy
+#  ssl_required :create, :new
+#  ssl_allowed :destroy
   def new
     @title="Sign in"
   end
