@@ -34,4 +34,29 @@ module SessionsHelper
 #  def remember_token
 #    cookies.signed[:remember_token]||[nil,nil]
 #  end
+
+  def deny_access
+    store_location
+    redirect_to signin_path, :notice=>"Please sign in to access this page"
+  #flash[:notice]="Please sign in to access this page"
+  #redirect_to signin_path
+  end
+  
+  def current_user?(user)
+    user==current_user
+  end
+  
+  def redirect_back_or (default)
+    redirect_to(session[:location]||default)
+    clear_location
+  end
+  
+  private
+  def store_location
+    session[:location]=request.fullpath
+  end
+  def clear_location
+    session[:location]=nil
+  end
+    
 end

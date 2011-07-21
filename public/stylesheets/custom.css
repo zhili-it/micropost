@@ -178,3 +178,12 @@ margin-bottom: 10px;
 	font-size: 12px; 
 	list-style: square;
 }
+
+ul.users{
+	margin-top:1em;
+}
+
+.users li{
+	margin-top:0.5em;
+	list-style:none;
+}
