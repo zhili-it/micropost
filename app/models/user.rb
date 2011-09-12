@@ -14,6 +14,7 @@ require 'digest'
 class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name,:email,:password,:password_confirmation
+  has_many :posts, :dependent=>:destroy
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -28,6 +29,11 @@ class User < ActiveRecord::Base
                        
   before_save :encrypt_password
   
+  def feed
+    #this is preliminary, please see chapter 12 for full implementation
+    Post.where("user_id=?",id)
+  end
+
   def matching_password?(submitted_password)
     encrypted_password==encrypt(submitted_password)
   end

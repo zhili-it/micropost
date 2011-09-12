@@ -141,4 +141,43 @@ describe User do
       @user.should be_admin
     end
   end
+  
+  describe "post associations" do
+    before (:each) do
+      @user=User.create(@attr)
+      @p1=Factory(:post,:user=>@user, :created_at=>1.day.ago)
+      @p2=Factory(:post, :user=>@user, :created_at=>1.hour.ago)
+    end
+    
+    it "should have a posts attribute" do
+      @user.should respond_to(:posts)
+    end
+    
+    it "should have the right post in the right order" do
+      @user.posts.should==[@p2,@p1]
+    end
+    
+    it "should destroy associated posts" do
+      @user.destroy
+      [@p1,@p2].each do |post|
+        Post.find_by_id(post.id).should be_nil 
+      end
+    end
+    
+    describe "status feed" do
+      it "should have a feed" do
+        @user.should respond_to(:feed)
+      end
+      
+      it "should include the user's posts" do
+        @user.feed.include?(@p1).should be_true
+        @user.feed.include?(@p2).should be_true
+      end
+      
+      it "should not include different user's posts" do
+        p3=Factory(:post, :user=>Factory(:user,:email=>Factory.next(:email)))
+        @user.feed.include?(p3).should be_false
+      end
+    end
+  end
 end

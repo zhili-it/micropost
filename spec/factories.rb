@@ -9,3 +9,8 @@ end
 Factory.sequence :email do |n|
   "person-#{n}@example.com"
 end
+
+Factory.define :post do |post|
+  post.content "foo bar"
+  post.association :user
+end

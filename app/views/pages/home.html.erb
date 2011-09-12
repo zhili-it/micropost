@@ -1,3 +1,7 @@
+<%if signed_in?%>
+<%=render 'shared/signed_in'%>
+<%else%>
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 <%=link_to "Sign up now",signup_path,:class=>"signup_button round"%>
+<%end%>

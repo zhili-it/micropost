@@ -180,6 +180,14 @@ describe UsersController do
       get :show, :id=>@user
       response.should have_selector("h1>img",:class=>"gravatar")
     end
+    
+    it "should show the user's posts" do
+      p1=Factory(:post,:user=>@user,:content=>"Foo bar")
+      p2=Factory(:post,:user=>@user,:content=>"Bar stupid")
+      get :show, :id=>@user
+      response.should have_selector("span.content",:content=>p1.content)
+      response.should have_selector("span.content", :content=>p2.content)
+    end
   end
   
   describe "post 'create'" do
