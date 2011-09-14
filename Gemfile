@@ -9,7 +9,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'gravatar_image_tag'
 gem 'bartt-ssl_requirement', :require => 'ssl_requirement'
 gem 'will_paginate','3.0.pre2'
-
+gem 'jquery-rails', '>= 1.0.12'
 
 group :development do
 gem 'rspec-rails','2.0.1'
