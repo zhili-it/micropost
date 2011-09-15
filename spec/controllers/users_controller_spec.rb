@@ -188,6 +188,31 @@ describe UsersController do
       response.should have_selector("span.content",:content=>p1.content)
       response.should have_selector("span.content", :content=>p2.content)
     end
+    
+    describe "user info in sidebar" do
+      it "should show the number of user's posts" do
+        p1=Factory(:post,:user=>@user,:content=>"Foo bar")
+        p2=Factory(:post,:user=>@user,:content=>"Bar stupid")
+        p3=Factory(:post,:user=>@user,:content=>"hello stupid")
+        get :show, :id=>@user
+        response.should have_selector("span.posts",:content=>"3 posts")
+      end
+      
+      it "should show 'post' if user has only one post" do
+        p1=Factory(:post,:user=>@user,:content=>"Foo bar")
+        get :show, :id=>@user
+        response.should have_selector("span.posts", :content=>"1 post")
+      end
+      
+      it "should show 'post' if user has more than one posts" do
+        p1=Factory(:post,:user=>@user,:content=>"Foo bar")
+        p2=Factory(:post,:user=>@user,:content=>"Bar stupid")
+        get :show, :id=>@user
+        response.should have_selector("span.posts",:content=>"2 posts")
+      end
+    end
+    
+    
   end
   
   describe "post 'create'" do
