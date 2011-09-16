@@ -88,7 +88,7 @@ describe UsersController do
         end
       end
       
-      it "should paginate user" do
+      it "should paginate user" do        
         get :index
         response.should have_selector("div.pagination")
         response.should have_selector("span.disabled",:content=>"Previous")
@@ -189,6 +189,26 @@ describe UsersController do
       response.should have_selector("span.content", :content=>p2.content)
     end
     
+    it "should paginate the user's posts" do
+      60.times do
+        Factory(:post,:user=>@user, :content=>"lots of stupid")
+      end
+              
+      get :show, :id=>@user
+      response.should have_selector("div.pagination")
+      response.should have_selector("span.disabled",:content=>"Previous")
+      response.should have_selector("a",:href=>"/users/1?page=2",:content=>"2")
+      response.should have_selector("a", :href=>"/users/1?page=2",:content=>"Next")
+    end
+    
+    it "should not have a 'delete' link for other user's posts" do  
+      wrong_user=Factory(:user,:email=>Factory.next(:email))
+      test_sign_in(wrong_user)
+      @post=Factory(:post,:user=>@user)
+      get :show, :id=>@user
+      response.should_not have_selector("a",:title=>@post.content,:content=>"delete")
+    end
+    
     describe "user info in sidebar" do
       it "should show the number of user's posts" do
         p1=Factory(:post,:user=>@user,:content=>"Foo bar")
@@ -209,7 +229,7 @@ describe UsersController do
         p2=Factory(:post,:user=>@user,:content=>"Bar stupid")
         get :show, :id=>@user
         response.should have_selector("span.posts",:content=>"2 posts")
-      end
+      end            
     end
     
     

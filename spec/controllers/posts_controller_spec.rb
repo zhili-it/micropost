@@ -72,6 +72,8 @@ describe PostsController do
         delete :destroy, :id=>@post
         response.should redirect_to(root_path)
       end
+      
+
     end
     
     describe "for an auhorized user" do
