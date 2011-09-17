@@ -4,7 +4,10 @@
 //use simplyCountable function to countdown character left. textarea id is post_content
 $(document).ready(function()
 {
-$('#post_content').simplyCountable();
+$('#post_content').simplyCountable({
+	strictMax:true
+
+});
 
 });
 

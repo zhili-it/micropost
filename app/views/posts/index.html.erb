@@ -1,0 +1,27 @@
+<h1>User's posts</h1>
+
+	<%unless @posts.empty?%>		
+		<%@posts.each do |post|%>
+			<div id="container">
+				<div id="gravatar-left">
+					<%=link_to gravatar_for(post.user), post.user%>
+				</div>
+					
+				<%if current_user?(post.user)%>
+				<div id="delete-right">
+					<%=link_to "Delete", post, :method=>:delete, :confirm=>"You sure?", :title=>post.content%>
+				</div>
+				<%end%>
+					
+				<div id="content-middle">	
+					<span class="name"><%=link_to post.user.name, post.user%></span><br/>
+					<span class="content"><%=post.content%></span><br/>
+					<span class="time">Posted <%=time_ago_in_words(post.created_at)%> ago.</span>
+				</div>
+			</div>
+		<%end%>
+	<%end%>
+	<%=will_paginate @posts%>
+
+
+

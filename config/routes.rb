@@ -1,6 +1,9 @@
 Micropost::Application.routes.draw do
 
-   resources :users
+   resources :users do
+     get 'posts'=>'posts#index'
+   end
+      
    resources :sessions, :only=>[:new,:create,:destroy]
    resources :posts, :only=>[:create,:destroy]
 

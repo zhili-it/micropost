@@ -243,4 +243,52 @@ form.new_post textarea {
 	margin-bottom: 0;
 }
 
+#container{
+	width: 68%;
+	margin: 10px auto;	
+	background-color: #fff;
+	color: #333;
+	border: 1px solid gray;
+	line-height: 130%;
+}
+
+
+
+#gravatar-left{
+	float: left;
+	width: 100px;
+	margin: 0;
+	padding: 1em;
+}
+
+#delete-right{
+	float: right;
+	width: 60px;
+	margin:0;
+	padding: 1em;
+}
+
+#content-middle{
+	background: #cff;
+	margin-left: 100px;
+	margin-right: 100px;
+	padding: 1em;
+	max-width: 36em;
+}
+
+#content-middle span.name{
+	font-weight: bold;
+}
+#content-middle span.time{
+	color:grey;
+	font-size:80%;
+}
+
+
+
+
+
+
+
+
 

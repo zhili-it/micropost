@@ -14,10 +14,19 @@ class PostsController < ApplicationController
     end
   end
   
+  def index
+     @user=current_user
+     @posts=@user.posts.paginate(:page=>params[:page])
+     @title=@user.name + " s'posts"     
+  
+  end
+  
   def destroy
     @post.destroy
     redirect_back_or root_path
   end
+  
+  
   
   private
     def authorized_user
