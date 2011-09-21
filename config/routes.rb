@@ -1,11 +1,15 @@
 Micropost::Application.routes.draw do
 
    resources :users do
+     member do
+        get :following,:followers 
+      end
      get 'posts'=>'posts#index'
    end
       
    resources :sessions, :only=>[:new,:create,:destroy]
    resources :posts, :only=>[:create,:destroy]
+   resources :relationships, :only=>[:create, :destroy]
 
   root :to=>'pages#home'
   match '/contact',:to=>'pages#contact'
